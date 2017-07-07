@@ -66,8 +66,9 @@ def get_contest_metadata(root):
 def get_contest_results(root):
     standings = []
     rows = root.find_all("tr")
-    for row in rows[1:]:
-        standings.append(get_user_results(row))
+    if rows[1].text != "На данный момент решения не посылались.":
+        for row in rows[1:]:
+            standings.append(get_user_results(row))
     return tuple(standings)
 
 
