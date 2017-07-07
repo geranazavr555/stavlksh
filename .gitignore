@@ -4,3 +4,4 @@ staticfiles
 .env
 .idea
 *.sqlite3
+dev-tests

@@ -3,3 +3,7 @@ Django
 gunicorn
 psycopg2
 whitenoise
+requests
+beautifulsoup4
+lxml
+html5lib
