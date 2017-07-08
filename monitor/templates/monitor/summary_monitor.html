@@ -9,6 +9,8 @@
         <tr>
             <th rowspan="2">№</th>
             <th rowspan="2">Участник</th>
+            <th rowspan="2">=</th>
+            <th rowspan="2">SE</th>
             {% for contest in contests %}
                 <th colspan="{{ contest.1|length }}">{{ contest.0 }}</th>
             {% endfor %}
@@ -24,6 +26,8 @@
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ contestant.0 }}</td>
+            <td>{{ contestant.2 }}</td>
+            <td>{{ contestant.3 }}</td>
 
             {% for item in contestant.1 %}
                 {% if "+" in item %}

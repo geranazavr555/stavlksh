@@ -84,7 +84,15 @@ def get_contest_information(contest_id):
 
 
 def count_contestant_score(x):
-    tasks = x[1]
+    tasks_solved = x[2]
+    failure_attempts = x[3]
+    score = 10000 * tasks_solved - failure_attempts
+    return -score
+
+
+def bind_total_and_se(contestant):
+    contestant = list(contestant)
+    tasks = contestant[1]
     tasks_solved = 0
     failure_attempts = 0
     for attempt in tasks:
@@ -92,12 +100,13 @@ def count_contestant_score(x):
             tasks_solved += 1
             if len(attempt) > 1:
                 failure_attempts += int(attempt[1:])
-    score = 10000 * tasks_solved - failure_attempts
-    return -score
+    contestant.append(tasks_solved)
+    contestant.append(failure_attempts)
+    return tuple(contestant)
 
 
 def sort_summary_results(summary_results):
-    return sorted(list(summary_results.items()), key=count_contestant_score)
+    return sorted(list(summary_results), key=count_contestant_score)
 
 
 def get_summary_results(*args):
@@ -117,5 +126,7 @@ def get_summary_results(*args):
                 summary_results[contestant].extend(["."] * contest.task_count)
 
     contests_metadata = tuple(contest.metadata for contest in contests)
+
+    summary_results = [bind_total_and_se(contestant) for contestant in summary_results.items()]
 
     return contests_metadata, sort_summary_results(summary_results)
