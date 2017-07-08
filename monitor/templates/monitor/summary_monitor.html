@@ -7,9 +7,13 @@
 <body>
     <table border="1" align="center" cellpadding="4">
         <tr>
-            <th>№</th>
-            <th>Участник</th>
-
+            <th rowspan="2">№</th>
+            <th rowspan="2">Участник</th>
+            {% for contest in contests %}
+                <th colspan="{{ contest.1|length }}">{{ contest.0 }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
             {% for contest in contests %}
                 {% for task in contest.1 %}
                     <th>{{ task }}</th>
