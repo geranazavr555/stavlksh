@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Сводный монитор Ставропольской ЛКШ-2017</title>
+</head>
+<body>
+    <table border="1" align="center" cellpadding="4">
+        <tr>
+            <th>№</th>
+            <th>Участник</th>
+
+            {% for contest in contests %}
+                {% for task in contest.1 %}
+                    <th>{{ task }}</th>
+                {% endfor %}
+            {% endfor %}
+        </tr>
+        {% for contestant in contestants %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ contestant.0 }}</td>
+
+            {% for item in contestant.1 %}
+                <td align="center">{{ item }}</td>
+            {% endfor %}
+
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
