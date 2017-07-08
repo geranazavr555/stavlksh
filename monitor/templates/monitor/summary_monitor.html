@@ -22,7 +22,13 @@
             <td>{{ contestant.0 }}</td>
 
             {% for item in contestant.1 %}
-                <td align="center">{{ item }}</td>
+                {% if "+" in item %}
+                    <td align="center" bgcolor="#90FF77">{{ item }}</td>
+                {% elif "-" in item %}
+                    <td align="center" bgcolor="#DD290E">{{ item }}</td>
+                {% else %}
+                    <td align="center" bgcolor="#FFFFFF"></td>
+                {% endif %}
             {% endfor %}
 
         </tr>
