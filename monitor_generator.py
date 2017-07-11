@@ -16,10 +16,13 @@ def generate(*args):
 
 
 def run_loop(*args):
+    print("test_run_loop")
     generate(*args)
     sleep(60)
 
 if __name__ == "__main__":
+    print("test1")
     os.environ["DJANGO_SETTINGS_MODULE"] = "stavlksh.settings"
+    print("test2")
     django.setup()
     run_loop(134, 135)
