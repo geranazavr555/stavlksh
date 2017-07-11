@@ -6,7 +6,7 @@ from . import scraper
 
 get_summary_results_cached = cacher.cache
 get_summary_results_cached.set_function(scraper.get_summary_results)
-get_summary_results_cached.set_args(134)
+get_summary_results_cached.set_args(134, 135)
 
 
 def home(request):
