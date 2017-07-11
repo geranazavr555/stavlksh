@@ -18,6 +18,7 @@ def generate(*args):
 def run_loop(*args):
     print("test_run_loop")
     generate(*args)
+    print("test_run_loop2")
     sleep(60)
 
 if __name__ == "__main__":
