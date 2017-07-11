@@ -21,6 +21,6 @@ get_summary_results = Cache(scraper.get_summary_results, 60)
 
 
 def home(request):
-    contests, contestants = get_summary_results(91, 94, 96, 98, 101, 103, 105, 107, 109, 112, 113, 116)
+    contests, contestants = get_summary_results(134)
     context = {"contestants": contestants, "contests": contests}
     return render(request, "monitor/summary_monitor.html", context)
