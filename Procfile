@@ -1,2 +1,2 @@
 web: gunicorn stavlksh.wsgi
-updater: python monitor/updater.py
+worker: python monitor_generator.py
