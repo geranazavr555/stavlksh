@@ -19,14 +19,14 @@ def generate(*args):
 
 def run_loop(*args):
     while True:
-        print("test_run_loop")
+        print("Monitor generating started")
         generate(*args)
-        print("test_run_loop2")
+        print("Monitor generating finished")
         sleep(60)
 
 if __name__ == "__main__":
-    print("test1")
+    print("Started preparing instance of Django for worker")
     os.environ["DJANGO_SETTINGS_MODULE"] = "stavlksh.settings"
-    print("test2")
     django.setup()
+    print("Preparing finished")
     run_loop(134, 135)
