@@ -7,20 +7,21 @@ from django.template.loader import render_to_string
 from monitor import scraper
 
 
-def generate(*args):
+def generate():
+    args = (contest.stavpoisk_id for contest in models.MonitoredContest.objects.all())
+
     contests, contestants = scraper.get_summary_results(*args)
     context = {"contestants": contestants, "contests": contests}
     html = render_to_string("monitor/summary_monitor.html", context)
 
-    from monitor import models
     models.CachedHtml.objects.all().delete()
     models.CachedHtml(content=html).save()
 
 
-def run_loop(*args):
+def run_loop():
     while True:
         print("Monitor generating started")
-        generate(*args)
+        generate()
         print("Monitor generating finished")
         sleep(60)
 
@@ -28,5 +29,7 @@ if __name__ == "__main__":
     print("Started preparing instance of Django for worker")
     os.environ["DJANGO_SETTINGS_MODULE"] = "stavlksh.settings"
     django.setup()
+    from monitor import models
     print("Preparing finished")
-    run_loop(134, 135)
+
+    run_loop()
