@@ -11,15 +11,18 @@ def generate(*args):
     contests, contestants = scraper.get_summary_results(*args)
     context = {"contestants": contestants, "contests": contests}
     html = render_to_string("monitor/summary_monitor.html", context)
-    with open("monitor/cached.html", "w", encoding="utf-8") as file:
-        file.write(html)
+
+    from monitor import models
+    models.CachedHtml.objects.all().delete()
+    models.CachedHtml(content=html).save()
 
 
 def run_loop(*args):
-    print("test_run_loop")
-    generate(*args)
-    print("test_run_loop2")
-    sleep(60)
+    while True:
+        print("test_run_loop")
+        generate(*args)
+        print("test_run_loop2")
+        sleep(60)
 
 if __name__ == "__main__":
     print("test1")

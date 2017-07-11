@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 
 from . import scraper
+from . import models
 
 
 def home(request):
-    with open("monitor/cached.html", "r", encoding="utf-8") as file:
-        html = "\n".join(file.readlines())
+    html = models.CachedHtml.objects.all()[0]
+    html = html.content
     return HttpResponse(html)
