@@ -3,6 +3,7 @@ import os
 
 import django
 from django.template.loader import render_to_string
+from requests.exceptions import ConnectionError
 
 from monitor import scraper
 
@@ -23,7 +24,7 @@ def run_loop():
         print("Monitor generating started")
         try:
             generate()
-        except Exception:
+        except ConnectionError:
             print("Can't generate monitor")
         else:
             print("Monitor generating finished")
