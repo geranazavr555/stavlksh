@@ -27,7 +27,7 @@ def run_loop():
             print("Can't generate monitor")
         else:
             print("Monitor generating finished")
-        sleep(60)
+        sleep(5)
 
 if __name__ == "__main__":
     print("Started preparing instance of Django for worker")
