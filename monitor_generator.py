@@ -21,8 +21,12 @@ def generate():
 def run_loop():
     while True:
         print("Monitor generating started")
-        generate()
-        print("Monitor generating finished")
+        try:
+            generate()
+        except Exception:
+            print("Can't generate monitor")
+        else:
+            print("Monitor generating finished")
         sleep(60)
 
 if __name__ == "__main__":
