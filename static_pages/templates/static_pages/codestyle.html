@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Правила форматирования кода</title>
+    <style type="text/css">
+      h3 { text-indent : 2em;
+           color : #003;
+           margin : 0px;
+         }
+
+      h2 { color : #900;
+           font-family : Arial;
+           font-weight : normal;
+           padding : 10px 0px;
+           margin : 0px;
+         }
+
+      ul { font-size : 12pt;
+           font-family : "Times New Roman";
+         }
+   </style>
+</head>
+<body>
+<h2>Рекомендуемые правила форматирования кода:</h2>
+<ul type="1">
+   <li> Отступ <b>два или четыре</b> пробела.
+    <br><b><font color="red">Важное ПРИМЕЧАНИЕ:</font></b> если вы <b>выбрали</b> какой-либо отступ, то <b>соблюдайте его (и только его!) внутри документа</b>.
+   <li> Вокруг знаков арифметических операций ставятся <b>пробелы</b>.
+     <br><font color="red">Примечание:</font> Знаки <b>унарных</b> операций (например <font face="courier new">b := -a</font>) пробелами <b>не обособляются</b>.
+   <li> Вокруг присваиваний ставятся <b>пробелы</b>.
+   <li> Вокруг знаков логических операций (<font face="courier new"><b>and</b></font>,
+                                           <font face="courier new"><b>or</b></font>,
+                                           <font face="courier new"><b>xor</b></font>,
+                                           <font face="courier new">=</font> (в Паскале),
+                                           <font face="courier new">&&</font>,
+                                           <font face="courier new">||</font>,
+                                           <font face="courier new">^</font>,
+                                           <font face="courier new">==</font> (в Си),
+                                           <font face="courier new">></font>,
+                                           <font face="courier new"><=</font> и т.д.) ставятся <b>пробелы</b>.
+   <li> Процедуры, функции и блоки описаний разделяются <b>пустыми строками</b>.
+   <li> После запятой и двоеточия ставится <b>пробел</b>.
+   <li> Между именем функции и скобками пробел <b>не ставится</b>, с внутренней стороны скобок пробел <b>не ставится</b>.
+   <li> Каждый новый оператор должен находиться <b>в отдельной строке</b>.
+   <li> Переменные разных типов объявляются в <b>разных строках</b>.
+   <li> (Паскаль) Слово <b>var</b> должно быть в <b>отдельной строке</b>.
+   <li> (Паскаль) Форматирование слова <b>type</b> такое же, как и слова <b>var</b>.
+   <li> Пишите <b>имена переменных и функций (процедур) одинаково внутри документа</b> (например всегда с маленькой или всегда с большой буквы).
+   <li> (Паскаль) <b>После операторов</b>, находящихся перед словом <b>end</b> точка с запятой ставится <b>ОБЯЗАТЕЛЬНО</b>.
+</ul>
+   <h2>Примеры правильно отформатированных программ:</h2>
+
+<table width="100%" cellspacing=10 cellpadding=0 border=0>
+<tr>
+   <td width="50%"><h3>Паскаль:</h3></td>
+   <td><h3>Си:</h3></td>
+</tr>
+<tr>
+
+<td valign=top><div>
+
+<pre class="brush: delphi">
+
+program progsum;
+
+{$APPTYPE CONSOLE}
+{$R+,Q+}
+
+function sum(a, b: longint): longint;
+begin
+  sum := a + b;
+end;
+
+var
+  i, a, b, s: longint;
+  x, y: double;
+  arr: array [1..1000] of boolean;
+
+begin
+  assign(input, 'aplusb.in');
+  reset(input);
+  assign(output, 'aplusb.out');
+  rewrite(output);
+
+  read(a, b);
+
+  {комментарий}
+  arr[1] := true;
+
+  for i := 2 to 1000 do
+    if ((a > 0) and (arr[i-1])) then
+      arr[i] := true;
+
+  for i := 1 to 1000 do
+    arr[i] := false;
+
+  s := 0;
+  if (a &lt; 0) then begin
+    a := -a;
+    if (b &lt; 0) then begin
+      b := -b;
+      s := a + b;
+    end else begin
+      while (s &lt;= 0) do begin
+        case a of
+          1: begin
+            s := s + 3;
+          end;
+          2: begin
+            s := s - 4;
+            a := a - 1;
+          end;
+          else
+            s := 1;
+        end;
+      end;
+    end;
+  end else if (b &lt; 0) then begin
+    b := -b;
+    s := (a + b) * (a - b);
+  end else begin
+    s := sum(a, b) * sum(a, b);
+  end;
+
+  writeln(s);
+
+  close(input);
+  close(output);
+end.
+
+</pre>
+</div>
+</td>
+
+<td valign=top>
+<div>
+<pre class="brush: cpp">
+
+#include &lt;stdio.h&gt;
+
+int sum(int a, int b) {
+  return a + b;
+}
+
+int main(int argc, char** argv) {
+  int a;
+  int b;
+  int s;
+  double x, y;
+  bool arr[1000];
+
+  freopen("aplusb.in", "r", stdin);
+  freopen("aplusb.out", "w", stdout);
+
+  scanf("%d%d", &amp;a, &amp;b);
+
+  //комментарий
+  arr[0] = true;
+
+  for (int i = 1; i < 1000; i++)
+    if ((a < 0) && (arr[i-1]))
+      arr[i] = true;
+
+  for (int i = 0; i < 1000; i++)
+    arr[i] = false;
+
+  s = 0;
+  if (a &lt; 0) {
+    a = -a;
+    if (b &lt; 0) {
+      b = -b;
+      s = a + b;
+    } else {
+      while (s &lt;= 0) {
+        switch (a) {
+        case 1:
+          s = s + 3;
+          break;
+        case 2:
+          s = s - 4;
+          a = a - 1;
+          break;
+        default:
+          s = 1;
+        }
+      }
+    }
+  } else if (b &lt; 0) {
+    b = -b;
+    s = (a + b) * (a - b);
+  } else {
+    s = sum(a, b) * sum(a, b);
+  }
+
+  printf("%d\n", s);
+
+  fclose(stdin);
+  fclose(stdout);
+
+  return 0;
+}
+
+</pre>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

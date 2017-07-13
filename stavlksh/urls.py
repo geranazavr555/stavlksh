@@ -17,8 +17,11 @@ from django.conf.urls import url
 from django.contrib import admin
 
 import monitor.views
+import static_pages.views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', monitor.views.home),
+    url(r'^codestyle/', static_pages.views.codestyle, name="codestyle"),
+    url(r'^monitor/', monitor.views.home, name="monitor"),
+    url(r'', static_pages.views.home),
 ]
