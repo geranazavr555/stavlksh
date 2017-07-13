@@ -65,63 +65,71 @@
 program progsum;
 
 {$APPTYPE CONSOLE}
-{$R+,Q+}
 
-function sum(a, b: longint): longint;
+function sum(a, b: integer): integer;
 begin
-  sum := a + b;
+    sum := a + b;
 end;
 
 var
-  i, a, b, s: longint;
-  x, y: double;
-  arr: array [1..1000] of boolean;
+    i, a, b, s: integer;
+    x, y: double;
+    arr: array [1..1000] of boolean;
 
 begin
-  assign(input, 'aplusb.in');
-  reset(input);
-  assign(output, 'aplusb.out');
-  rewrite(output);
+    assign(input, 'aplusb.in');
+    reset(input);
+    assign(output, 'aplusb.out');
+    rewrite(output);
 
-  read(a, b);
+    read(a, b);
 
-  {комментарий}
-  arr[1] := true;
+    {комментарий}
+    arr[1] := true;
 
-  for i := 2 to 1000 do
-    if ((a > 0) and (arr[i-1])) then
-      arr[i] := true;
+    for i := 2 to 1000 do
+        if ((a > 0) and (arr[i - 1])) then
+            arr[i] := true;
 
-  for i := 1 to 1000 do
-    arr[i] := false;
+    for i := 1 to 1000 do
+        arr[i] := false;
 
-  s := 0;
-  if (a &lt; 0) then begin
-    a := -a;
-    if (b &lt; 0) then begin
-      b := -b;
-      s := a + b;
-    end else begin
-      while (s &lt;= 0) do begin
-        case a of
-          1: begin
-            s := s + 3;
-          end;
-          2: begin
-            s := s - 4;
-            a := a - 1;
-          end;
-          else
-            s := 1;
+    s := 0;
+    if (a &lt; 0) then
+    begin
+        a := -a;
+        if (b &lt; 0) then
+        begin
+            b := -b;
+            s := a + b;
+        end
+    else
+    begin
+        while (s &lt;= 0) do
+        begin
+            case a of
+                1:
+                begin
+                    s := s + 3;
+                end;
+                2:
+                begin
+                    s := s - 4;
+                    a := a - 1;
+                end;
+            end;
         end;
-      end;
-    end;
-  end else if (b &lt; 0) then begin
-    b := -b;
-    s := (a + b) * (a - b);
-  end else begin
-    s := sum(a, b) * sum(a, b);
-  end;
+    end
+    else
+        if (b &lt; 0) then
+        begin
+            b := -b;
+            s := (a + b) * (a - b);
+        end
+        else
+        begin
+            s := sum(a, b) * sum(a, b);
+        end;
 
   writeln(s);
 
@@ -139,66 +147,77 @@ end.
 
 #include &lt;stdio.h&gt;
 
-int sum(int a, int b) {
-  return a + b;
+int sum(int a, int b)
+{
+    return a + b;
 }
 
-int main(int argc, char** argv) {
-  int a;
-  int b;
-  int s;
-  double x, y;
-  bool arr[1000];
+int main(int argc, char** argv)
+{
+    int a;
+    int b;
+    int s;
+    double x, y;
+    bool arr[1000];
 
-  freopen("aplusb.in", "r", stdin);
-  freopen("aplusb.out", "w", stdout);
+    freopen("aplusb.in", "r", stdin);
+    freopen("aplusb.out", "w", stdout);
 
-  scanf("%d%d", &amp;a, &amp;b);
+    scanf("%d%d", &amp;a, &amp;b);
 
-  //комментарий
-  arr[0] = true;
+    //комментарий
+    arr[0] = true;
 
-  for (int i = 1; i < 1000; i++)
-    if ((a < 0) && (arr[i-1]))
-      arr[i] = true;
+    for (int i = 1; i < 1000; i++)
+        if ((a < 0) && (arr[i - 1]))
+            arr[i] = true;
 
-  for (int i = 0; i < 1000; i++)
-    arr[i] = false;
+    for (int i = 0; i < 1000; i++)
+        arr[i] = false;
 
-  s = 0;
-  if (a &lt; 0) {
-    a = -a;
-    if (b &lt; 0) {
-      b = -b;
-      s = a + b;
-    } else {
-      while (s &lt;= 0) {
-        switch (a) {
-        case 1:
-          s = s + 3;
-          break;
-        case 2:
-          s = s - 4;
-          a = a - 1;
-          break;
-        default:
-          s = 1;
+    s = 0;
+    if (a &lt; 0)
+    {
+        a = -a;
+        if (b &lt; 0)
+        {
+            b = -b;
+            s = a + b;
         }
-      }
+        else
+        {
+            while (s &lt;= 0)
+            {
+                switch (a)
+                {
+                case 1:
+                    s = s + 3;
+                    break;
+                case 2:
+                    s = s - 4;
+                    a = a - 1;
+                    break;
+                }
+            }
+        }
     }
-  } else if (b &lt; 0) {
-    b = -b;
-    s = (a + b) * (a - b);
-  } else {
-    s = sum(a, b) * sum(a, b);
-  }
+    else
+        if (b &lt; 0)
+        {
+            b = -b;
+            s = (a + b) * (a - b);
+        }
+        else
+        {
+            s = sum(a, b) * sum(a, b);
+        }
 
-  printf("%d\n", s);
+    printf("%d\n", s);
 
-  fclose(stdin);
-  fclose(stdout);
+    fclose(stdin);
+    fclose(stdout);
 
-  return 0;
+    return 0;
 }
 
 </pre>
