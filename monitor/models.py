@@ -8,3 +8,7 @@ class CachedHtml(models.Model):
 
 class MonitoredContest(models.Model):
     stavpoisk_id = models.IntegerField()
+
+
+class ExcludedUser(models.Model):
+    name = models.CharField(max_length=255)

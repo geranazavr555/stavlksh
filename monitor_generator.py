@@ -11,7 +11,16 @@ from monitor import scraper
 def generate():
     args = (contest.stavpoisk_id for contest in models.MonitoredContest.objects.all())
 
+    excluded_contestants = list(user.name for user in models.ExcludedUser.objects.all())
+
     contests, contestants = scraper.get_summary_results(*args)
+
+    tmp_contestants = []
+    for contestant in contestants:
+        if contestant[0] not in excluded_contestants:
+            tmp_contestants.append(contestant)
+    contestants = tmp_contestants
+
     context = {"contestants": contestants, "contests": contests}
     html = render_to_string("monitor/summary_monitor.html", context)
 

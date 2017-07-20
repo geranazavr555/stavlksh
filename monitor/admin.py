@@ -13,3 +13,9 @@ class MonitoredContestAdmin(admin.ModelAdmin):
     list_display = ("stavpoisk_id", )
 
 admin.site.register(models.MonitoredContest, MonitoredContestAdmin)
+
+
+class ExcludedUserAdmin(admin.ModelAdmin):
+    list_display = ("name", )
+
+admin.site.register(models.ExcludedUser, ExcludedUserAdmin)
