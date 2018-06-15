@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^codestyle/', static_pages.views.codestyle, name="codestyle"),
     url(r'^monitor/', monitor.views.home, name="monitor"),
+    url(r'^monitor2017/', monitor.views.home, name="monitor2017"),
     url(r'', static_pages.views.home),
 ]
