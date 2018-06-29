@@ -8,10 +8,16 @@ from requests.exceptions import ConnectionError
 from monitor import scraper
 
 
-def generate():
-    args = (contest.stavpoisk_id for contest in models.MonitoredContest.objects.all())
+def generate_all():
+    active_monitors = models.Monitor.objects.filter(active=True)
+    for monitor in active_monitors:
+        generate(monitor)
 
-    excluded_contestants = list(user.name for user in models.ExcludedUser.objects.all())
+
+def generate(monitor):
+    args = (contest.stavpoisk_id for contest in models.MonitoredContest.objects.filter(owner__id=monitor.id))
+
+    excluded_contestants = list(user.name for user in models.ExcludedUser.objects.filter(owner__id=monitor.id))
 
     contests, contestants = scraper.get_summary_results(*args)
 
@@ -24,20 +30,22 @@ def generate():
     context = {"contestants": contestants, "contests": contests}
     html = render_to_string("monitor/summary_monitor.html", context)
 
-    models.CachedHtml.objects.all().delete()
-    models.CachedHtml(content=html).save()
+    cached_html, created = models.CachedHtml.objects.get_or_create(defaults={"owner": monitor}, owner__id=monitor.id)
+    cached_html.content = html
+    cached_html.save()
 
 
 def run_loop():
     while True:
         print("Monitor generating started")
         try:
-            generate()
+            generate_all()
         except ConnectionError:
-            print("Can't generate monitor")
+            print("Can't generate monitor -- Connecting Error")
         else:
             print("Monitor generating finished")
-        sleep(30)
+        sleep(55)
+
 
 if __name__ == "__main__":
     print("Started preparing instance of Django for worker")

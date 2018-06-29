@@ -3,7 +3,7 @@ from django.contrib import admin
 from . import models
 
 class MonitorAdmin(admin.ModelAdmin):
-    list_display = ("id", "name")
+    list_display = ("id", "name", "active")
 
 
 admin.site.register(models.Monitor, MonitorAdmin)
