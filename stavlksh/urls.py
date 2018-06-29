@@ -22,7 +22,7 @@ import static_pages.views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^codestyle/', static_pages.views.codestyle, name="codestyle"),
-    url(r'^monitor/', monitor.views.home, name="monitor"),
-    url(r'^monitor2017/', monitor.views.home, name="monitor2017"),
+    url(r'^monitor([0-9]+)/', monitor.views.exact_monitor, name="monitor"),
+    #url(r'^monitor2017/', monitor.views.home, name="monitor2017"), # TODO: FIX URL
     url(r'', static_pages.views.home),
 ]
