@@ -46,7 +46,7 @@ def get_user_results(node):
         if isinstance(item, NavigableString):
             continue
         if "user" in item["class"]:
-            name = item.text
+            name = item.text.strip()
         elif "task" in item["class"]:
             tasks.append(get_verdict(item.span))
     return UserResult(name, tuple(tasks))
@@ -133,5 +133,5 @@ def get_summary_results(*args):
     return contests_metadata, sort_summary_results(summary_results)
 
 if __name__ == '__main__':
-    print(get_summary_results(295, 296))
+    # print(get_summary_results(295, 296))
     print(get_summary_results(294, 297))
