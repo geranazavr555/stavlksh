@@ -44,6 +44,8 @@ def get_user_results(node):
     name = ""
     tasks = []
     for item in node:
+        if isinstance(item, NavigableString):
+            continue
         if "user" in item["class"]:
             name = item.text
         elif "task" in item["class"]:
