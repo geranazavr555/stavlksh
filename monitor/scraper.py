@@ -99,8 +99,8 @@ def bind_total_and_se(contestant):
     for attempt in tasks:
         if "+" in attempt:
             tasks_solved += 1
-            if len(attempt) > 1:
-                failure_attempts += int(attempt[1:])
+            if len(attempt.strip()) > 1:
+                failure_attempts += int(attempt.strip()[1:])
     contestant.append(tasks_solved)
     contestant.append(failure_attempts)
     return tuple(contestant)
@@ -131,3 +131,7 @@ def get_summary_results(*args):
     summary_results = [bind_total_and_se(contestant) for contestant in summary_results.items()]
 
     return contests_metadata, sort_summary_results(summary_results)
+
+if __name__ == '__main__':
+    print(get_summary_results(295, 296))
+    print(get_summary_results(294, 297))
