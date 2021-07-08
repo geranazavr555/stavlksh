@@ -1,8 +1,7 @@
 from collections import namedtuple
 
 import requests
-from bs4 import BeautifulSoup
-
+from bs4 import BeautifulSoup, NavigableString
 
 Verdict = namedtuple("Verdict", ("result", "time"))
 UserResult = namedtuple("UserResult", ("name", "tasks"))
